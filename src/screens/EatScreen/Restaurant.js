@@ -18,6 +18,7 @@ import Cart from "../../components/Eats/Cart";
 import { database } from "../../shared/configs/firebase";
 import firebase from "firebase";
 import LottieView from "lottie-react-native";
+import { useAuthContext } from "../../shared/context/AuthContext";
 
 const data = [
   {
@@ -27,6 +28,7 @@ const data = [
     title: "Lasagna",
     duration: "35-35 min",
     rating: 4.2,
+    price: 23.5,
   },
   {
     id: "2",
@@ -35,6 +37,7 @@ const data = [
     title: "Tandori Chicken",
     duration: "35-35 min",
     rating: 4.2,
+    price: 33,
   },
   {
     id: "3",
@@ -43,6 +46,7 @@ const data = [
     title: "Chilaquiles",
     duration: "35-35 min",
     rating: 4.2,
+    price: 14.9,
   },
   {
     id: "4",
@@ -51,10 +55,13 @@ const data = [
     title: "Chicken Sala",
     duration: "35-35 min",
     rating: 4.2,
+    price: 33.7,
   },
 ];
 
 const Restaurant = () => {
+  const { user } = useAuthContext();
+  console.log("USER", user);
   const route = useRoute();
   const navigation = useNavigation();
   const cart = useSelector(selectCart);
@@ -77,6 +84,7 @@ const Restaurant = () => {
         items: getStoreCart(),
         restaurantName: name,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        user: user.uid,
       })
       .then((res) => {
         setTimeout(() => {

@@ -12,7 +12,7 @@ import FoodItems from "../../components/Eats/FoodItems";
 import LottieView from "lottie-react-native";
 import { Icon } from "react-native-elements";
 
-const OrderSuccess = () => {
+const OrderItem = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const { name, orders } = route.params;
@@ -58,21 +58,10 @@ const OrderSuccess = () => {
         loop
         speed={0.5}
       />
-      <View
-        style={tw`absolute bottom-10 w-full justify-center items-center mt-20`}
-      >
-        <TouchableOpacity
-          style={tw`bg-black px-6 py-4 rounded-full flex-row items-center justify-center`}
-          onPress={() => navigation.navigate("Eat")}
-        >
-          <Icon name="search" type="font-awesome" color="white" />
-          <Text style={tw`text-white font-semibold ml-2`}>Browse again</Text>
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 };
 
-export default OrderSuccess;
+export default OrderItem;
 
 const styles = StyleSheet.create({});

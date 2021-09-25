@@ -9,6 +9,7 @@ import Categories from "../../components/Eats/Categories";
 import Restaurants from "../../components/Eats/Restaurants";
 import { YELP_APIKEY } from "@env";
 import BottomTabs from "../../components/Eats/BottomTabs";
+import LottieView from "lottie-react-native";
 
 export default function EatScreen() {
   const [activeTab, setActiveTab] = useState("Delivery");
@@ -43,16 +44,43 @@ export default function EatScreen() {
   };
 
   return (
-    <SafeAreaView style={tw`flex-1`}>
-      <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+    <View style={tw`flex-1`}>
+      <SafeAreaView>
+        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      </SafeAreaView>
       <View style={tw`flex flex-row items-center justify-center py-4`}>
         <Icon name="location" type="ionicon" size={24} />
         <Text style={tw`font-semibold ml-1`}>{origin?.description}</Text>
       </View>
       <Categories />
       <Restaurants restaurants={getRestaurants()} />
-      <BottomTabs />
-    </SafeAreaView>
+      <BottomTabs color="Browse" />
+      {restaurants.length < 1 && (
+        <View
+          style={{
+            backgroundColor: "black",
+            opacity: 0.5,
+            position: "absolute",
+            justifyContent: "center",
+            alignItems: "center",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <LottieView
+            style={{
+              height: 200,
+            }}
+            source={require("../../assets/animations/scanner.json")}
+            autoPlay
+            loop
+            speed={5}
+          />
+        </View>
+      )}
+    </View>
   );
 }
 

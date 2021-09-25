@@ -15,11 +15,15 @@ import { selectCart } from "../../../slices/navSlice";
 const Cart = ({ orders }) => {
   const navigation = useNavigation();
 
+  const calculateTotal = () => {
+    return orders.reduce((total, item) => total + item.price, 0);
+  };
+
   const renderItem = ({ item }) => {
     return (
       <View style={tw`px-8 py-4 flex-row justify-between`}>
         <Text>{item.title}</Text>
-        <Text>$23.4</Text>
+        <Text>${item.price.toFixed(2)}</Text>
       </View>
     );
   };
@@ -39,7 +43,9 @@ const Cart = ({ orders }) => {
         style={tw`px-8 py-4 flex-row justify-between border-gray-300 border-t`}
       >
         <Text style={tw`font-semibold text-lg`}>Subtotal</Text>
-        <Text style={tw`text-lg font-bold`}>$23.4</Text>
+        <Text style={tw`text-lg font-bold`}>
+          ${calculateTotal().toFixed(2)}
+        </Text>
       </View>
     </View>
   );

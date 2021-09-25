@@ -17,10 +17,8 @@ const FoodItems = ({ storeId, orders, showCheckbox, showLastComponent }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-  console.log("CART", cart);
 
   const selectItem = (item, value) => {
-    console.log(value);
     if (value) {
       dispatch(addCart({ ...item, storeId, id: `${storeId}${item.id}` }));
     } else {
@@ -54,7 +52,7 @@ const FoodItems = ({ storeId, orders, showCheckbox, showLastComponent }) => {
             with butter lettuce and tomato salad, with butter lettuce and tomato
             salad
           </Text>
-          <Text>$12</Text>
+          <Text>${item.price.toFixed(2)}</Text>
         </View>
         <Image
           source={{ uri: item.image }}

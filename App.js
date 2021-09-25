@@ -10,17 +10,24 @@ import {
 import { Provider } from "react-redux";
 import HomeRoutes from "./src/routes/HomeRoutes";
 import { store } from "./store";
+import Login from "./src/screens/AuthScreen/Login";
+import { AuthProvider } from "./src/shared/context/AuthContext";
+import Wrapper from "./src/Wrapper";
+
 export default function App() {
   return (
-    <Provider store={store}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
-        style={{ flex: 1 }}
-      >
-        <HomeRoutes />
-      </KeyboardAvoidingView>
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
+          style={{ flex: 1 }}
+        >
+          {/* <HomeRoutes /> */}
+          <Wrapper />
+        </KeyboardAvoidingView>
+      </Provider>
+    </AuthProvider>
   );
 }
 
